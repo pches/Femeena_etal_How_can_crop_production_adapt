@@ -18,6 +18,8 @@ MSD-LIVE Data Repository -
 **Contact info:** 
 - Jeffrey Nucciarone, [https://orcid.org/0000-0002-1092-9142] https://orcid.org/0000-0002-1092-9142 (data curation),
 - Femeena Pandara Valappil, [https://orcid.org/0000-0002-9120-8493] https://orcid.org/0000-0002-9120-8493 (code),
+- Danialle Grogan, [https://orcid.org/0000-0001-7661-8454] https://orcid.org/0000-0001-7661-8454 (code),
+- Alexander Prusevich, [https://orcid.org/0000-0002-9529-443X] https://orcid.org/0000-0002-9529-443X (code),
 - Kathryn Daenzer, katie.daenzer@gmail.com (code)
 
 ## System requirements:
