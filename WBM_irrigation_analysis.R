@@ -1,13 +1,13 @@
 #This script by created as part of the PCHES (Program on Coupled Human and Earth Systems) project
-#studying the impact of unsustainable groundwater restrictions on crop production in the US West
+#studying the impact of restrictions of groundwater beyond recharge (GBR) on crop production in the US West
 #The project is funded by the Department of Energy
 
 #This script were developed during the final stages of the project (2024-2025)
 #Last updated in March 2025
 
 # This script is used to create the grid-scale irrigation water requests plot provided in the submitted manuscript 
-# The maps show unsustainable irrigation water request for the reference scenario, as well as
-# change in unsustainable irrigation water request (Iteration 10 - Iteration 0) for the state of California
+# The maps show GBR irrigation water request for the reference scenario, as well as
+# change in GBR irrigation water request (Iteration 10 - Iteration 0) for the state of California
 # All the input files needed to run this script and output files generated are listed in the MetaData file
 
 
@@ -60,8 +60,8 @@ r2 <- raster(t(tot_irrig.diff), xmn=min(lon), xmx=max(lon), ymn=min(lat), ymx=ma
 r2<-flip(r2,direction='y')
 r2_df <- as.data.frame(r2,xy=TRUE,na.rm=TRUE)
 
-#Plot unsustainable irrigation maps
-#Load data for unsustainable irrigation for iteration 0
+#Plot GBR irrigation maps
+#Load data for GBR irrigation for iteration 0
 nc_data3 <- nc_open("data/WBM/wbm_irrigationExtra_dc_iteration_0.nc")
 lon <- ncvar_get(nc_data3, "lon")
 lat <- ncvar_get(nc_data3,"lat", verbose = F)
@@ -78,7 +78,7 @@ r3 <- raster(t(sum_irrigation3), xmn=min(lon), xmx=max(lon), ymn=min(lat), ymx=m
 r3<-flip(r3,direction='y')
 r3_df <- as.data.frame(r3,xy=TRUE,na.rm=TRUE)
 
-#Load data for unsustainable irrigation for iteration 10
+#Load data for GBR irrigation for iteration 10
 nc_data4 <- nc_open("data/WBM/wbm_irrigationExtra_dc_iteration_10.nc")
 irrig.array4 <- ncvar_get(nc_data4, "irrigationExtra")
 fillvalue4 <- ncatt_get(nc_data4, "irrigationExtra", "_FillValue")
@@ -87,15 +87,15 @@ irrig.array4[irrig.array4 == fillvalue4$value] <- NA
 
 sum_irrigation4 <- round(apply(irrig.array4, MARGIN = c(1,2), FUN=sum),6)
 
-unsust_irrig.diff <- round((sum_irrigation4-sum_irrigation3)*100/sum_irrigation3,6)
+gbr_irrig.diff <- round((sum_irrigation4-sum_irrigation3)*100/sum_irrigation3,6)
 
-r4 <- raster(t(unsust_irrig.diff), xmn=min(lon), xmx=max(lon), ymn=min(lat), ymx=max(lat), crs = CRS("+proj=longlat +datum=WGS84"))
+r4 <- raster(t(gbr_irrig.diff), xmn=min(lon), xmx=max(lon), ymn=min(lat), ymx=max(lat), crs = CRS("+proj=longlat +datum=WGS84"))
 r4<-flip(r4,direction='y')
 r4_df <- as.data.frame(r4,xy=TRUE,na.rm=TRUE)
 myColors1 <- colorRampPalette(c("red","yellow","darkgreen"))(100)
 
 #save the map
-png("figures/WBM_irrigation_maps/Change_unsust_irrig.png",
+png("figures/WBM_irrigation_maps/Change_gbr_irrig.png",
     height = 2000, width = 1500,type = "cairo")
 
 p=ggplot()+
@@ -115,7 +115,7 @@ p=ggplot()+
         legend.text = element_text(size = 40),
         legend.key.height = unit(1, "cm")
   )+
-  labs(fill="Change in Unsustainable
+  labs(fill="Change in Groundwater-Beyond-Recharge
 Irrigation Water Request(%)
        ",
        x = "Longitude",
@@ -162,12 +162,12 @@ merged_df <- merge(r1_df, r3_df, by = c("x", "y"), suffixes = c("_r1_df", "_r3_d
 # Create new dataframe with ratio
 r5_df_iter0 <- data.frame(x = merged_df$x, 
                           y = merged_df$y, 
-                          layer = merged_df$layer_r3_df / merged_df$layer_r1_df) #fraction of unsustainable irrigation water
+                          layer = merged_df$layer_r3_df / merged_df$layer_r1_df) #fraction of GBR irrigation water
 
 myColors2 <- colorRampPalette(c("darkgreen","yellow","red"))(100)
 
-#save map of fraction of unsustainable irrigation water for reference scenario
-png("figures/WBM_irrigation_maps/Frac_unsust_irrig_iter0.png",
+#save map of fraction of GBR irrigation water for reference scenario
+png("figures/WBM_irrigation_maps/Frac_gbr_irrig_iter0.png",
     height = 4000, width = 3000, type = "cairo")
 
 p=ggplot()+
@@ -188,7 +188,7 @@ p=ggplot()+
         legend.key.height = unit(1, "cm")
   )+
   labs(title = " Reference scenario",
-       fill="Fraction of unsustainable water use
+       fill="Fraction of GBR water use
        ",
        x = "Longitude",
        y="Latitude")
@@ -233,14 +233,14 @@ merged_df <- merge(r1_df, r3_df, by = c("x", "y"), suffixes = c("_r1_df", "_r3_d
 # Create new dataframe with ratio
 r5_df_iter10 <- data.frame(x = merged_df$x, 
                            y = merged_df$y, 
-                           layer = merged_df$layer_r3_df / merged_df$layer_r1_df) #fraction of unsustainable irrigation water
+                           layer = merged_df$layer_r3_df / merged_df$layer_r1_df) #fraction of GBR irrigation water
 
 
 merged_df_diff <- merge(r5_df_iter0, r5_df_iter10, by = c("x", "y"), suffixes = c("_iter0_df", "_iter10_df"))
 
 r6_df <- data.frame(x = merged_df_diff$x, 
                     y = merged_df_diff$y, 
-                    layer = merged_df_diff$layer_iter10_df - merged_df_diff$layer_iter0_df) #difference in fraction of unsust water from iter 0 to iter 10
+                    layer = merged_df_diff$layer_iter10_df - merged_df_diff$layer_iter0_df) #difference in fraction of GBR water from iter 0 to iter 10
 
 
 lon_min <- -125  # Minimum longitude
@@ -254,8 +254,8 @@ r6_df_filtered <- r6_df[r6_df$x >= lon_min & r6_df$x <= lon_max &
 
 myColors3 <- colorRampPalette(c("darkblue", "blue", "lightblue"))(100)
 
-#save the CA map for change in fraction of unsustainable irrigation
-png("figures/WBM_irrigation_maps/Frac_unsust_irrig_iter10-iter0_CA.png", type = "cairo")
+#save the CA map for change in fraction of GBR irrigation
+png("figures/WBM_irrigation_maps/Frac_gbr_irrig_iter10-iter0_CA.png", type = "cairo")
 
 p=ggplot()+
   geom_tile(data=r6_df_filtered,aes(x=x,y=y,fill=layer),alpha=0.7)+
@@ -274,7 +274,7 @@ p=ggplot()+
         legend.text = element_text(size = 50),
         legend.key.height = unit(1, "cm")
   )+
-  labs(title = "Change in fraction of unsustainable water use",
+  labs(title = "Change in fraction of GBR water use",
        fill="Iteration 10 - Iteration 0
        ",
        x = "Longitude",
