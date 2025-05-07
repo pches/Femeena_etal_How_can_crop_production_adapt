@@ -86,8 +86,8 @@ This script produces the following output:
 
 | Output File	                                            | Output File Description                        	          | 
 | --------------------------------------------------------- | -----------------------------------------------------------|
-| /results/gross_irr_ long.csv	                            | Gross irrigation water (km^3/yr) |
-| /results/GBR_km3_long.csv	                            | Groundwater beyond recharge (km^3/yr) |
+| /results/gross_irr_long.csv	                            | Gross irrigation water (km^3/yr) |
+| /results/gbr_km3_long.csv	                            | Groundwater beyond recharge (km^3/yr) |
 | /results/gwr_irr_km3_ long.csv	                    | Groundwater within recharge (km^3/yr) |
 | /results/gwr_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from groundwater within recharge (GWR) |
 | /results/gbr_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from groundwater beyond recharge |
@@ -130,7 +130,7 @@ This script produces the following output:
 
 | Output File	                                            | Output File Description                        	          | 
 | --------------------------------------------------------- | -----------------------------------------------------------|
-| /figures/ irr_def_maps_by_crop /[crop]_irr_def_map.png (for each of the six  crop categories)	| Multiple Plots, used to produce: Figure S2, Bottom image- Optimal Deficit Irrigation strategy by crop category |
+| /figures/irr_def_maps_by_crop /[crop]_irr_def_map.png (for each of the six  crop categories)	| Multiple Plots, used to produce: Figure S2, Bottom image- Optimal Deficit Irrigation strategy by crop category |
 | figures/Irr_def_map_allCrops_i10.png	                    | Figure S2, Top image - Optimal deficit irrigation strategy (all crops) |
 | figures/Yld_vs_IrrDef_i10.png	                            | Plot - Yield deficit v/s Irrigation deficit (all crops) Note: Not used in the manuscript and replaced by Figure 3 |
 | figures/Yld_vs_IrrDef_grain_i10.png	                    | Figure S4 - Yield deficit v/s Irrigation deficit (grain) |
@@ -204,7 +204,7 @@ The following input files are required:
 
 | Input File	                                             | Input File Description                        	          | 
 | ---------------------------------------------------------- | ------------------------------------------------         |
-| /data/WBM/wbm_irrigationGross_dc_iteration_0.nc	     | Water withdrawals for agriculture for iteration o (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
+| /data/WBM/wbm_irrigationGross_dc_iteration_0.nc	     | Water withdrawals for agriculture for iteration 0 (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
 | /data/WBM/wbm_irrigationGross_dc_iteration_10.nc	     | Water withdrawals for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
 | /data/WBM/wbm_irrigationExtra_dc_iteration_0.nc	     | Water withdrawals from groundwater beyond recharge for agriculture for iteration 0 (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
 | /data/WBM/wbm_irrigationExtra_dc_iteration_10.nc	     | Water withdrawals from groundwater beyond recharge for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios.  |
