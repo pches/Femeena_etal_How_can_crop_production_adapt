@@ -1,5 +1,5 @@
 #This script by created as part of the PCHES (Program on Coupled Human and Earth Systems) project
-#studying the impact of unsustainable groundwater restrictions on crop production in the US West
+#studying the impact of restrictions of extracting groundwater beyond recharge on crop production in the US West
 #The project is funded by the Department of Energy
 
 #This script were developed throughout the course of the project (2021-2025)
@@ -66,7 +66,7 @@ dndc_to_implan = function(dat,  # data to convert, as data frame
 }
 ########################################################################################################################
 ### function: aggregate WBM crops to DREM crops
-# use this function for both UGW (km3) by crop and state and Gross Irr (km3) by crop and state 
+# use this function for both GBR (km3) by crop and state and Gross Irr (km3) by crop and state 
 
 # first, convert WBM to DNDCe crop list
 
@@ -224,58 +224,58 @@ write.csv(gross.irr.all, "results/gross_irr_long.csv", row.names=F)
 
 
 ########################################################################################################################
-# 2. UGW, km3/yr
+# 2.GBR, km3/yr
 ########################################################################################################################
 pth    = "data/DNDCe/" # path to files
 nfiles = n_iter            # number of files to read
-prefx  = "UGW_mmYr_states_"  # file name prefix
-var.nm = "UGW_km3Yr"
+prefx  = "GBR_mmYr_states_"  # file name prefix
+var.nm = "GBR_km3Yr"
 wbm.to.implan = 1
 
 
-ugw.km3.all = wbm_to_drem_long(nfiles, 
+gbr.km3.all = wbm_to_drem_long(nfiles, 
                               pth,
                               prefx,
                               var.nm,
                               wbm.to.implan)
 
-write.csv(ugw.km3.all, "results/ugw_km3_long.csv", row.names=F)
+write.csv(gbr.km3.all, "results/gbr_km3_long.csv", row.names=F)
 
 ########################################################################################################################
-# 3. UGW, fraction
-# 3b: sustainable irrigation water
+# 3. GBR, fraction
+# 3b: GWR (groundwater within recharge) irrigation water
 
 g = gross.irr.all
-u = ugw.km3.all
+u = gbr.km3.all
 
 colnames(g)[3] = "GrossIrr_km3"
-colnames(u)[3] = "UGW_km3"
+colnames(u)[3] = "GBR_km3"
 
 g = g[,-5]
 u = u[,-5]
 
 b = merge(g, u)
-b$irr_sust = b$GrossIrr_km3 - b$UGW_km3
+b$irr_gwr = b$GrossIrr_km3 - b$GBR_km3
 
-b$variable = "irr_sust_km3"
+b$variable = "irr_gwr_km3"
 b=b[,-c(4:5)]
 colnames(b)[4] = "Value"
 
-write.csv(b, "results/sust_irr_km3_long.csv", row.names=F)
+write.csv(b, "results/gwr_irr_km3_long.csv", row.names=F)
 
-# 3b. Sustainable irrigation water as fraction of gross
+# 3b. Irrigation groundwater within recharge (gwr) as fraction of gross
 gross.irr = read.csv('results/gross_irr_long.csv')
-sust.irr  = read.csv('results/sust_irr_km3_long.csv')
-dat = merge(gross.irr, sust.irr, by=c("IMPLAN_crop", "State", "iteration"))
-dat$sust.irr.frac = dat$Value.y / dat$Value.x
-dat$variable = "irr_sust_frac"
+gwr.irr  = read.csv('results/gwr_irr_km3_long.csv')
+dat = merge(gross.irr, gwr.irr, by=c("IMPLAN_crop", "State", "iteration"))
+dat$gwr.irr.frac = dat$Value.y / dat$Value.x
+dat$variable = "irr_gwr_frac"
 dat = dat[,c(1,2,3,8,9)]
-write.csv(dat, "results/sust_irr_frac_long.csv", row.names=F)
+write.csv(dat, "results/gwr_irr_frac_long.csv", row.names=F)
 
-dat$unsust.irr.frac = 1-dat$sust.irr.frac
-dat$variable = "irr_unsust_frac"
+dat$gbr.irr.frac = 1-dat$gwr.irr.frac #groundwater beyond recharge (gbr)
+dat$variable = "irr_gbr_frac"
 dat = dat[,c(1,2,3,5,6)]
-write.csv(dat, "results/unsust_irr_frac_long.csv", row.names=F)
+write.csv(dat, "results/gbr_irr_frac_long.csv", row.names=F)
 ########################################################################################################################
 # 4. deficit irrigation
 ########################################################################################################################
@@ -413,7 +413,7 @@ for(i in 0:nfiles){
 
 write.csv(yld.max.all, "results/max_yield_kg.C.ha.csv", row.names=F)
 
-#### b. calculate the sustainable water-based yield for each crop/state, each iteration. save to file as "result"
+#### b. calculate the gwr water-based yield for each crop/state, each iteration. save to file as "result"
 pth    = "data/DNDCe/" # path to files
 nfiles = n_iter           # number of files to read
 prefx  = "DNDC_yield_deficit_"  # file name prefix 
@@ -432,37 +432,37 @@ for(i in 0:nfiles){
 pth    = "data/DNDCe/" # path to files
 nfiles = n_iter           # number of files to read
 prefx  = "DNDC_yield_kg.C.ha_"  # file name prefix
-var.nm = "sust_yield"
+var.nm = "gwr_yield"
 wbm.to.implan = 0
 dndc.to.implan = 1
 
 
-sust_yld_kg.C.ha = wbm_to_drem_long(nfiles, 
+gwr_yld_kg.C.ha = wbm_to_drem_long(nfiles, 
                                     pth,
                                     prefx,
                                     var.nm,
                                     wbm.to.implan,
                                     dndc.to.implan)
 
-write.csv(sust_yld_kg.C.ha, "results/sust_yld_kg.C.ha_long.csv", row.names=F)
+write.csv(gwr_yld_kg.C.ha, "results/gwr_yld_kg.C.ha_long.csv", row.names=F)
 
-# 6b. Unsustainable yield (kgC/ha)
-dat = merge(sust_yld_kg.C.ha, yld.max.all, by=c("IMPLAN_crop", "State", "iteration"))
-dat$unsust_yld = dat$Max_yield_kg.C.ha - dat$Value
-unsust_yld_kg.C.ha = dat[,c(1,2,3,7)]
-unsust_yld_kg.C.ha$variable = "unsust_yld"
-write.csv(unsust_yld_kg.C.ha, "results/unsust_yld_kg.C.ha_long.csv", row.names=F)
+# 6b. GBR associated yield (kgC/ha)
+dat = merge(gwr_yld_kg.C.ha, yld.max.all, by=c("IMPLAN_crop", "State", "iteration"))
+dat$gbr_yld = dat$Max_yield_kg.C.ha - dat$Value
+gbr_yld_kg.C.ha = dat[,c(1,2,3,7)]
+gbr_yld_kg.C.ha$variable = "gbr_yld"
+write.csv(gbr_yld_kg.C.ha, "results/gbr_yld_kg.C.ha_long.csv", row.names=F)
 ########################################################################################################################
 
 ### write data in long format
 
 # load data
 gross.irr          = read.csv("results/gross_irr_long.csv")
-ugw.km3             = read.csv("results/ugw_km3_long.csv")
-sust.wtr.km3        = read.csv("results/sust_irr_km3_long.csv")
+gbr.km3             = read.csv("results/gbr_km3_long.csv")
+gwr.wtr.km3        = read.csv("results/gwr_irr_km3_long.csv")
 max.yld.kgC.ha     = read.csv("results/max_yield_kg.C.ha.csv")
-unsust.yld.kgC.ha  = read.csv("results/unsust_yld_kg.C.ha_long.csv")
-sust.yld.kg.C.ha   = read.csv("results/sust_yld_kg.C.ha_long.csv")
+gbr.yld.kgC.ha  = read.csv("results/gbr_yld_kg.C.ha_long.csv")
+gwr.yld.kg.C.ha   = read.csv("results/gwr_yld_kg.C.ha_long.csv")
 irr.land.area      = read.csv("results/irr_land_area_long.csv")
 rfd.land.area      = read.csv("results/rfd_land_area_long.csv")
 
@@ -470,8 +470,8 @@ rfd.land.area      = read.csv("results/rfd_land_area_long.csv")
 colnames(max.yld.kgC.ha)[3] = "Value"
 max.yld.kgC.ha$variable = "max_yield"
 
-colnames(unsust.yld.kgC.ha)[4] = "Value"
-unsust.yld.kgC.ha = unsust.yld.kgC.ha[, c(1,2,4,3,5)]
+colnames(gbr.yld.kgC.ha)[4] = "Value"
+gbr.yld.kgC.ha =gbr.yld.kgC.ha[, c(1,2,4,3,5)]
 
 # convert land areas from 2.4 thousand hectares to thousand hectares
 irr.land.area$Value = irr.land.area$Value / 2.4
@@ -479,11 +479,11 @@ rfd.land.area$Value = rfd.land.area$Value / 2.4
 
 # merge all
 dat.all = rbind(gross.irr, 
-                ugw.km3, 
-                sust.wtr.km3,
+                gbr.km3, 
+                gwr.wtr.km3,
                 max.yld.kgC.ha, 
-                unsust.yld.kgC.ha,
-                sust.yld.kg.C.ha,
+                gbr.yld.kgC.ha,
+                gwr.yld.kg.C.ha,
                 irr.land.area,
                 rfd.land.area)
 
@@ -497,11 +497,11 @@ for(s in states){
     sr = sr[,c(3,4,5)]
     sr.wide = reshape(sr, idvar = "variable", timevar = "iteration", direction = "wide")
     sr.wide$variable = c("Total_irr_water_km3",
-                         "Unsustainable_irr_water_km3",
-                         "Sustainable_irr_water_km3",
+                         "GBR_irr_water_km3",
+                         "GWR_irr_water_km3",
                          "Max_irrigated_yield_kgC_per_ha",
-                         "Unsustainable_yield_kgC_per_ha",
-                         "Sustainable_yield_kgC_per_ha",
+                         "GBR_yield_kgC_per_ha",
+                         "GWR_yield_kgC_per_ha",
                          "Irrigated_land_area_1000_ha",
                          "Rainfed_land_area_1000_ha")
     
