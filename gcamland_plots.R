@@ -1,5 +1,5 @@
 #This script by created as part of the PCHES (Program on Coupled Human and Earth Systems) project
-#studying the impact of unsustainable groundwater restrictions on crop production in the US West
+#studying the impact of restrictions of extracting groundwater beyond recharge on crop production in the US West
 #The project is funded by the Department of Energy
 
 #This script were developed throughout the course of the project (2021-2025)
