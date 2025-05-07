@@ -89,8 +89,8 @@ This script produces the following output:
 | /results/gross_irr_ long.csv	                            | Gross irrigation water (km^3/yr) |
 | /results/ugw_km3_long.csv	                            | Unsustainable ground water (km^3/yr) |
 | /results/sust_irr_km3_ long.csv	                    | Sustainable irrigation water (km^3/yr) |
-| /results/sust_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from sustainable groundwater |
-| /results/unsust_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from unsustainable groundwater |
+| /results/sust_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from groundwater within recharge (GWR) |
+| /results/unsust_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from groundwater beyond recharge |
 | /results/deficit_yld_ long.csv	                    | Yield deficit or fraction of maximum yield |
 | /results/irr_land_area_ long.csv	                    | Irrigated land area (x 2.4 thousand hectares)Note: GCAM gives land area outputs in units that are different from other models. A factor of 2.4 is used to convert them to thousand hectares and report it in the final summary tables inside the ""crop_state_tables"" folder" |
 | /results/rfd_land_area_ long.csv	                    | Rainfed land area (x 2.4 thousand hectares)  Note: GCAM gives land area outputs in units that are different from other models. A factor of 2.4 is used to convert them to thousand hectares and report it in the final summary tables inside the ""crop_state_tables"" folder" |
@@ -181,8 +181,8 @@ The following input files are required:
 | --------------------------------------------------------------------           | ------------------------------------------------         |
 | /data/WBM/wbm_irrigationGross_dc_iteration_0.nc	                         | Water withdrawals for agriculture for iteration o (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
 | /data/WBM/wbm_irrigationGross_dc_iteration_10.nc	                         | Water withdrawals for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
-| /data/WBM/wbm_irrigationExtra_dc_iteration_0.nc	                         | Water withdrawals from unsustainable groundwater for agriculture for iteration 0 (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
-| /data/WBM/wbm_irrigationExtra_dc_iteration_10.nc	                         | Water withdrawals from unsustainable groundwater for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
+| /data/WBM/wbm_irrigationExtra_dc_iteration_0.nc	                         | Water withdrawals from groundwater beyond recharge for agriculture for iteration 0 (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
+| /data/WBM/wbm_irrigationExtra_dc_iteration_10.nc	                         | Water withdrawals from groundwater beyond recharge for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
 
 
 This script produces the following output:
@@ -206,8 +206,8 @@ The following input files are required:
 | ---------------------------------------------------------- | ------------------------------------------------         |
 | /data/WBM/wbm_irrigationGross_dc_iteration_0.nc	     | Water withdrawals for agriculture for iteration o (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
 | /data/WBM/wbm_irrigationGross_dc_iteration_10.nc	     | Water withdrawals for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
-| /data/WBM/wbm_irrigationExtra_dc_iteration_0.nc	     | Water withdrawals from unsustainable groundwater for agriculture for iteration 0 (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
-| /data/WBM/wbm_irrigationExtra_dc_iteration_10.nc	     | Water withdrawals from unsustainable groundwater for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios.  |
+| /data/WBM/wbm_irrigationExtra_dc_iteration_0.nc	     | Water withdrawals from groundwater beyond recharge for agriculture for iteration 0 (warmup step), daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios. |
+| /data/WBM/wbm_irrigationExtra_dc_iteration_10.nc	     | Water withdrawals from groundwater beyond recharge for agriculture for iteration 10, daily climatology (mm). Results for iterations 0 and 10 are used in the processing scripts to estimate the change in irrigation water use between reference and optimal scenarios.  |
 
 
 This script produces the following output:
@@ -233,7 +233,7 @@ This script produces the following output:
 
 | Output File	                        | Output File Description                                              | 
 | ------------------------------------- | ---------------------------------------------------------------------|
-| /figures/Yielddef_irrdef_plot.png     | Figure 3 - Fraction of maximum yield v/s fraction of total irrigation that is from sustainable groundwater |
+| /figures/Yielddef_irrdef_plot.png     | Figure 3 - Fraction of maximum yield v/s fraction of total irrigation that is from groundwater within recharge (GWR) |
 
 ---
 
