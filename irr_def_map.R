@@ -1,5 +1,5 @@
 #This script by created as part of the PCHES (Program on Coupled Human and Earth Systems) project
-#studying the impact of unsustainable groundwater restrictions on crop production in the US West
+#studying the impact of restrictions of extracting groundwater beyond recharge on crop production in the US West
 #The project is funded by the Department of Energy
 
 #This script were developed throughout the course of the project (2021-2025)
@@ -65,9 +65,9 @@ dndc_to_drem = read.csv(file = 'data/alpha_i_j_s_SprWinWht_WECC.csv',
 gross.irr.b = read.csv("data/DNDCe/IrrGross_mmYr_states_iteration_1.csv")
 gross.irr.s = read.csv("data/DNDCe/IrrGross_mmYr_states_iteration_10.csv")
 
-# UGW irrigation by state and WBM crop
-ugw.irr.b = read.csv("data/DNDCe/UGW_mmYr_states_iteration_1.csv")
-ugw.irr.s = read.csv("data/DNDCe/UGW_mmYr_states_iteration_10.csv")
+# GBR irrigation by state and WBM crop
+gbr.irr.b = read.csv("data/DNDCe/GBR_mmYr_states_iteration_1.csv")
+gbr.irr.s = read.csv("data/DNDCe/GBR_mmYr_states_iteration_10.csv")
 
 
 ### DNDCe output
@@ -103,12 +103,12 @@ gross.irr.s.drem = agg.wbm.to.drem(wbm.dat = gross.irr.s,
                                    drem.crop.list, crop_list)
 
 
-# baseline UGW
-ugw.b.drem = agg.wbm.to.drem(wbm.dat = ugw.irr.b, 
+# baseline GBR
+gbr.b.drem = agg.wbm.to.drem(wbm.dat = gbr.irr.b, 
                              drem.crop.list, crop_list)
 
-# scen 1 it 10 UGW
-ugw.s.drem = agg.wbm.to.drem(wbm.dat = ugw.irr.s, 
+# scen 1 it 10 GBR
+gbr.s.drem = agg.wbm.to.drem(wbm.dat = gbr.irr.s, 
                              drem.crop.list, crop_list)
 
 ######################################################################################################
@@ -116,7 +116,7 @@ ugw.s.drem = agg.wbm.to.drem(wbm.dat = ugw.irr.s,
 # yield deficit irr is already calculated
 yld.s = read.csv("data/DNDCe/DNDCe_to_IMPLAN_yield_deficit_STATE_iteration_10.csv")
 yld.s = yld.s[-2,] # remove "not_included" crop
-irr.def = cbind(ugw.s.drem$crop, (1 - (ugw.s.drem[,2:12]/gross.irr.s.drem[,2:12])))
+irr.def = cbind(gbr.s.drem$crop, (1 - (gbr.s.drem[,2:12]/gross.irr.s.drem[,2:12])))
 irr.def[is.na(irr.def)] = NA 
 colnames(irr.def)[1] = "crop"
 
@@ -282,16 +282,16 @@ for (k in 1:length(irr.def$crop)) {
 irr.gross.b.sum = colSums(gross.irr.b.drem[,2:12])
 irr.gross.s.sum = colSums(gross.irr.s.drem[,2:12])
 
-ugw.b.sum = colSums(ugw.b.drem[,2:12])
-ugw.s.sum = colSums(ugw.s.drem[,2:12])
+gbr.b.sum = colSums(gbr.b.drem[,2:12])
+gbr.s.sum = colSums(gbr.s.drem[,2:12])
 
-ugw.s.frac = 1 - (ugw.s.sum/irr.gross.s.sum)
+gbr.s.frac = 1 - (gbr.s.sum/irr.gross.s.sum)
 
 
 states.WECC$irr.def = mat.or.vec(nr=nrow(states.WECC@data), nc=1)
 states.WECC$NAME = sub(" ", ".", as.character(states.WECC$NAME)) # fix inconsistent state name for New Mexico
 for(i in 1:nrow(states.WECC@data)){
-  states.WECC$irr.def[i] = as.numeric(ugw.s.frac[which(names(ugw.s.frac) == states.WECC$NAME[i])])
+  states.WECC$irr.def[i] = as.numeric(gbr.s.frac[which(names(gbr.s.frac) == states.WECC$NAME[i])])
 }
 
 map.col = colorRampPalette(c(brewer.pal(n=9, name='RdYlBu')))(1000)
