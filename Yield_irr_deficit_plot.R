@@ -1,11 +1,11 @@
 #This script by created as part of the PCHES (Program on Coupled Human and Earth Systems) project
-#studying the impact of unsustainable groundwater restrictions on crop production in the US West
+#studying the impact of restrictions of extracting groundwater beyond recharge on crop production in the US West
 #The project is funded by the Department of Energy
 
 #This script was developed during the final stages of the project (2024-2025)
 #Last updated in March 2025
 
-# This script is used to plot fraction of maximum yield versus sustainable fraction of full irrigation for multiple states in the US West, as provided in Figure 3 of the submitted manuscript 
+# This script is used to plot fraction of maximum yield versus groundwater within recharge (GWR) fraction of full irrigation for multiple states in the US West, as provided in Figure 3 of the submitted manuscript 
 # All the input files needed to run this script and output files generated are listed in the MetaData file
 
 
