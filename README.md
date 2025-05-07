@@ -76,7 +76,7 @@ The following input files are required:
 | /data/GCAM/GCAM_2010_reference_land.csv	                                     | GCAMland starting point for rainfed and irrigated cropland areass, created from FAO GAEZ 2010 data (units are in 2.4 thousand hectares). |
 |/data/GCAM/GCAM_2015_reference_land.csv                                       | GCAMland starting point for rainfed and irrigated cropland areass, created from FAO GAEZ 2015 data (units are in 2.4 thousand hectares). |
 |/data/DNDCe/IrrGross_mmYr_states_ iteration_X.csv	                           | Total crop irrigation water usage (mm/year), by crop and state, for each iteration X. |
-|/data/DNDCe/UGW_mmYr_states_ iteration_X.csv	                                 | Unsustainable ground water usage (mm/year) for irrigation, by crop and state, for each iteration X. |
+|/data/DNDCe/UGW_mmYr_states_ iteration_X.csv	                                 | groundwater beyond recharge usage (mm/year) for irrigation, by crop and state, for each iteration X. |
 |/data//DNDCe/DNDCe_to_IMPLAN_yield_deficit_STATE_ iteration_X.csv	           | DNDC emulator output per iteration X for IMPLAN defined crops: values represent the proportion of maximum yield achieved.  A value of 1 = 100% of maximum yield achieved indicating no reduction due to water shortages.  All values < 1 indicate that deficit irrigation caused a reduction in yields. |
 |/data/DNDCe/DNDC_yield_deficit_ iteration_X.csv	                             | DNDC emulator output per iteration X for DNDC defined crops:  crop yield deficit based on irrigation deficits. A value of 1 = 100% of maximum yield achieved indicating no reduction due to irrigation shortages.  All values < 1 indicate that deficit irrigation caused a reduction in yields. |
 |/data/DNDCe/DNDC_yield_kg.C.ha_ iteration_X.csv	                             | DNDC absolute yield values in kg Carbon/hectare per iteration X. |
@@ -87,8 +87,8 @@ This script produces the following output:
 | Output File	                                            | Output File Description                        	          | 
 | --------------------------------------------------------- | -----------------------------------------------------------|
 | /results/gross_irr_ long.csv	                            | Gross irrigation water (km^3/yr) |
-| /results/ugw_km3_long.csv	                            | Unsustainable ground water (km^3/yr) |
-| /results/sust_irr_km3_ long.csv	                    | Sustainable irrigation water (km^3/yr) |
+| /results/ugw_km3_long.csv	                            | groundwater beyond recharge (km^3/yr) |
+| /results/sust_irr_km3_ long.csv	                    | groundwater within recharge (km^3/yr) |
 | /results/sust_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from groundwater within recharge (GWR) |
 | /results/unsust_irr_frac_ long.csv	                    | Fraction of irrigation water sourced from groundwater beyond recharge |
 | /results/deficit_yld_ long.csv	                    | Yield deficit or fraction of maximum yield |
@@ -97,7 +97,7 @@ This script produces the following output:
 | /results/yield_max_matrix.csv	                            | Matrix of max irrigated yields (kg C/ha), crop x state |
 | /results/max_yield_kg.C.ha.csv	                    | Maximum yield in kg Carbon/hectare (kgC/ha) |
 | /results/sust_yld_kg.C.ha_long.csv	                    | Yield corresponding to susytainable irrigation water in kgC/ha |
-| /results/unsust_yld_kg.C.ha_ long.csv	                    | Yield corresponding to unsustainable irrigation water in kgC/ha |
+| /results/unsust_yld_kg.C.ha_ long.csv	                    | Yield corresponding to groundwater beyond recharge in kgC/ha |
 | /results/crop_state_tables/[state]_[crop]_all_models.csv  | Per iteration output for all crops for all models |
 
 ---
@@ -121,8 +121,8 @@ The following input files are required:
 | /data/alpha_i_j_s_SprWinWht_WECC.csv	                                         | Provides mapping from DNDC crops to IMPLAN/DREM crops. |
 | /data/DNDCe/IrrGross_mmYr_states_iteration_1.csv	                         | Total crop irrigation water usage (mm/year), by crop and state, for iteration 1. |
 | /data/DNDCe/IrrGross_mmYr_states_iteration_10.csv 	                         | Total crop irrigation water usage (mm/year), by crop and state, for iteration 10. |
-| /data/DNDCe/UGW_mmYr_states_iteration_1.csv	                                 | Unsustainable ground water usage (mm/year) for irrigation, by crop and state, for iteration 1. |
-| /data/DNDCe/UGW_mmYr_states_iteration_10.csv	                                 | Unsustainable ground water usage (mm/year) for irrigation, by crop and state, for iteration 10. |
+| /data/DNDCe/UGW_mmYr_states_iteration_1.csv	                                 | groundwater beyond recharge usage (mm/year) for irrigation, by crop and state, for iteration 1. |
+| /data/DNDCe/UGW_mmYr_states_iteration_10.csv	                                 | groundwater beyond recharge usage (mm/year) for irrigation, by crop and state, for iteration 10. |
 | /data/DNDCe/DNDCe_to_IMPLAN_yield_deficit_STATE_iteration_1.csv	         | DNDC emulator output  for IMPLAN defined crops, Itration 1: values represent the proportion of maximum yield achieved.  A value of 1 = 100% of maximum yield achieved indicating no reduction due to water shortages.  All values < 1 indicate that deficit irrigation caused a reduction in yields. |
 | /data/DNDCe/DNDCe_to_IMPLAN_yield_deficit_STATE_iteration_10.csv	         | DNDC emulator output  for IMPLAN defined crops, Itration 10: values represent the proportion of maximum yield achieved.  A value of 1 = 100% of maximum yield achieved indicating no reduction due to water shortages.  All values < 1 indicate that deficit irrigation caused a reduction in yields. |
 
@@ -191,12 +191,12 @@ This script produces the following output:
 | --------------------------------------------------------- | -----------------------------------------------------------|
 | /figures/WBM_irrigation_maps/Change_unsust_irrig.png	    | Change in unsustainable irrgation water request between iteration 0 and 10 for the US West Change in irrigated land areas at the end of iteration 1 for each crop category Note: Not used in the manuscript |
 | /figures/WBM_irrigation_maps/Frac_unsust_irrig_iter0.png  | Figure 2a - Fraction of rrigation water coming from unssutainable ground water for reference (iteration 0) scenario |
-| /figures/WBM_irrigation_maps/Frac_unsust_irrig_iter10-iter0_CA.png	| Figure 2c - Change in fraction of unsustainable ground water use for California between iteration 0 and 10 |
+| /figures/WBM_irrigation_maps/Frac_unsust_irrig_iter10-iter0_CA.png	| Figure 2c - Change in fraction of groundwater beyond recharge use for California between iteration 0 and 10 |
 ---
 
 ### File name: WBM_irrigation_analysis.R	
 
-This script creates plots of grid-scale unsustainable irrigation fraction.	
+This script creates plots of grid-scale fraction of groundwater beyond recharge.	
 
 Creates output folder: /figures/WBM_irrigation_maps
 
@@ -216,17 +216,17 @@ This script produces the following output:
 | ------------------------------------------------------------------- | -----------------------------------------------------------|
 | /figures/WBM_irrigation_maps/Change_unsust_irrig.png	              | Change in unsustainable irrgation water request between iteration 0 and 10 for the US West Change in irrigated land areas at the end of iteration 1 for each crop category Note: Not used in the manuscript |
 | /figures/WBM_irrigation_maps/Frac_unsust_irrig_iter0.png	      | Figure 2a - Fraction of rrigation water coming from unssutainable ground water for reference (iteration 0) scenario |
-| /figures/WBM_irrigation_maps/Frac_unsust_irrig_iter10-iter0_CA.pn   | Figure 2c - Change in fraction of unsustainable ground water use for California between iteration 0 and 10 |
+| /figures/WBM_irrigation_maps/Frac_unsust_irrig_iter10-iter0_CA.pn   | Figure 2c - Change in fraction of groundwater beyond recharge use for California between iteration 0 and 10 |
 
 ---
 
 ### File name: Yield_irr_def_plot.R	
 
-This script creates a plot of sustainable irrigation fraction versus fraction of maximum yield.	
+This script creates a plot of fraction of groundwater within recharge versus fraction of maximum yield.	
 
 | Input File	                             | Input File Description                        	          | 
 | --------------------------------------     | ------------------------------------------------         |
-data/Yield_irr_deficit_figure_data.csv       | This file was externally created in Microsoft Excel using the summary data in results/crop_state_tables. We obtained the values for each state and crop combination by taking the ratio of sustainable irrigation water and total irrigation water (= fraction of full irrigation) and sustainable yield to maximum irrigated yield (= Fraction of maximum yield). Values were derived for iterations 0 and 10 and used to create the plot. |
+data/Yield_irr_deficit_figure_data.csv       | This file was externally created in Microsoft Excel using the summary data in results/crop_state_tables. We obtained the values for each state and crop combination by taking the ratio of groundwater within recharge and total irrigation water (= fraction of full irrigation) and sustainable yield to maximum irrigated yield (= Fraction of maximum yield). Values were derived for iterations 0 and 10 and used to create the plot. |
 
 
 This script produces the following output:
