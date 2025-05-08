@@ -255,7 +255,7 @@ r6_df_filtered <- r6_df[r6_df$x >= lon_min & r6_df$x <= lon_max &
 myColors3 <- colorRampPalette(c("darkblue", "blue", "lightblue"))(100)
 
 #save the CA map for change in fraction of GBR irrigation
-png("figures/WBM_irrigation_maps/Frac_gbr_irrig_iter10-iter0_CA.png", type = "cairo")
+png("figures/WBM_irrigation_maps/Frac_gbr_irrig_iter10-iter0_CA.png", height = 4000, width = 3000, type = "cairo")
 
 p=ggplot()+
   geom_tile(data=r6_df_filtered,aes(x=x,y=y,fill=layer),alpha=0.7)+
