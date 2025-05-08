@@ -101,7 +101,7 @@ gross.irr.s.drem <- gross.irr.s.drem[, c(1, match(sorted_col_names, col_names)+1
 gross.irr.s.drem <- gross.irr.s.drem[match(yld.def[,1], gross.irr.s.drem[,1]), , drop = FALSE]
 
 #change 1 to NA, if gross irrigation for that state-crop combo is zero.
-yld.def[gross.irr.s.drem[,1:12] == 0] <- NA
+yld.def[gross.irr.s.drem[,1:12] < 0.0001] <- NA
 
 # load GCAMland cropland area data. Use this to identify which states have 0 ha of irrigated land for each crop
 gcam_land = read.csv("data/GCAM/pches_output_Iter10.csv")
