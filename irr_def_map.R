@@ -116,7 +116,9 @@ gbr.s.drem = agg.wbm.to.drem(wbm.dat = gbr.irr.s,
 # yield deficit irr is already calculated
 yld.s = read.csv("data/DNDCe/DNDCe_to_IMPLAN_yield_deficit_STATE_iteration_10.csv")
 yld.s = yld.s[-2,] # remove "not_included" crop
-irr.def = cbind(gbr.s.drem$crop, (1 - (gbr.s.drem[,2:12]/gross.irr.s.drem[,2:12])))
+irr.def.ratio <- 1 - (gbr.s.drem[,2:12]/gross.irr.s.drem[,2:12])
+irr.def.ratio[gross.irr.s.drem[,2:12]<0.0001] <- NA
+irr.def = cbind(gbr.s.drem$crop, irr.def.ratio)
 irr.def[is.na(irr.def)] = NA 
 colnames(irr.def)[1] = "crop"
 
