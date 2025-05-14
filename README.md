@@ -13,7 +13,7 @@
 **Input Data:** The input data required to run the code in this repository is available at:
 
 MSD-LIVE Data Repository -  
-"Supporting Information - How Can Crop Production Adapt to Growing Groundwater Restrictions in the West?", authors: Daenzer, Kathryn; Femeena, Pandara Valappil; Frolking, Steve; Grogan, Danielle; Nucciarone, Jeffrey; Calvin, Kate; Lammers, Richard; Fisher-Vanden, Karen - https://doi.org/10.57931/2564849
+"Supporting Information - How Can Crop Production Adapt to Growing Groundwater Restrictions in the West?", authors: Daenzer, Kathryn; Femeena, Pandara Valappil; Frolking, Steve; Grogan, Danielle; Nucciarone, Jeffrey; Calvin, Kate; Lammers, Richard; Fisher-Vanden, Karen - [https://doi.org/10.57931/2564849](https://doi.org/10.57931/2565654)
 
 **Contact info:** 
 - Jeffrey Nucciarone, [https://orcid.org/0000-0002-1092-9142] https://orcid.org/0000-0002-1092-9142 (data curation),
@@ -38,7 +38,7 @@ All processing was performed on a Red Hat Enterprise Linux 8 system, but should 
 
 ## Scripts:
 
-The code provided here to reproduce the figures and tables in the paper requires the data available on MSD-Live at https://doi.org/10.57931/2564849. A description file available in this repo, in the form of a spreadsheet, lists the required input files for each script. The output file description lists each associated figure generated in the paper.
+The code provided here to reproduce the figures and tables in the paper requires the data available on MSD-Live at [https://doi.org/10.57931/2564849(https://doi.org/10.57931/2565654). A description file available in this repo, in the form of a spreadsheet, lists the required input files for each script. The output file description lists each associated figure generated in the paper.
 
 Here, we describe each dataset:
 
