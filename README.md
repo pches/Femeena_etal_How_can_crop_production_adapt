@@ -13,7 +13,7 @@
 **Input Data:** The input data required to run the code in this repository is available at:
 
 MSD-LIVE Data Repository -  
-"Supporting Information - How Can Crop Production Adapt to Growing Groundwater Restrictions in the West?", authors: Femeena, Pandara Valappil; Daenzer, Kathryn; Frolking, Steve; Grogan, Danielle; Nucciarone, Jeffrey; Calvin, Kate; Lammers, Richard; Fisher-Vanden, Karen - [https://doi.org/10.57931/2564849](https://doi.org/10.57931/2565654)
+"Supporting Information - How Can Crop Production Adapt to Growing Groundwater Restrictions in the West?", authors: Femeena, Pandara Valappil; Daenzer, Kathryn; Frolking, Steve; Grogan, Danielle; Nucciarone, Jeffrey; Calvin, Kate; Lammers, Richard; Fisher-Vanden, Karen - [https://doi.org/10.57931/2999592](https://doi.org/10.57931/2999592))
 
 **Contact info:** 
 - Jeffrey Nucciarone, [https://orcid.org/0000-0002-1092-9142] https://orcid.org/0000-0002-1092-9142 (data curation),
