@@ -14,6 +14,7 @@
 
 MSD-LIVE Data Repository -  
 "Supporting Information - How Can Crop Production Adapt to Growing Groundwater Restrictions in the West?", authors: Femeena, Pandara Valappil; Daenzer, Kathryn; Frolking, Steve; Grogan, Danielle; Nucciarone, Jeffrey; Calvin, Kate; Lammers, Richard; Fisher-Vanden, Karen - [https://doi.org/10.57931/2999592](https://doi.org/10.57931/2999592)
+
 **Contact info:** 
 - Jeffrey Nucciarone, [https://orcid.org/0000-0002-1092-9142] https://orcid.org/0000-0002-1092-9142 (data curation),
 - Femeena Pandara Valappil, [https://orcid.org/0000-0002-9120-8493] https://orcid.org/0000-0002-9120-8493 (code),
